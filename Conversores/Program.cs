@@ -4,6 +4,7 @@ using System.Linq;
 using System.Net.NetworkInformation;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml.Linq;
 
 namespace Conversores
 {
@@ -65,7 +66,7 @@ namespace Conversores
             {1.07, 0.91, 0.81, 0.78, 1.43, 0.79, 1.42, 1, 0.73, 1.51},  // INR
             {1.45, 1.23, 1.10, 1.08, 2.00, 1.08, 1.96, 1.37, 1, 1.80},  // BRL
             {0.69, 0.59, 0.52, 0.51, 0.93, 0.52, 0.94, 0.66, 0.56, 1}   // MXN
-        };
+            };
 
             // Nombres de las monedas
             string[] monedas = { "USD", "EUR", "GBP", "CAD", "AUD", "JPY", "CNY", "INR", "BRL", "MXN" };
@@ -90,11 +91,50 @@ namespace Conversores
 
             double resultado = monto * tasas[origen, destino];
             Console.WriteLine($"El monto convertido es: {resultado} {monedas[destino]}");
+
+            Console.ReadLine();
         }
 
         static void masas()
         {
+            //definimos las tasas de conversion
+            double[,] medidas = {
+                {1, 0.45, 4.54, 45.36, 453.59, 2267.69,45359.24, 4535982.37, 453592370, 0.0005 },//LIBRA 
+                {2.2, 1, 10, 100, 1000, 5000, 100000, 1000000, 1000000000, 0.001 },//KILOGRAMO
+                {0.22, 0.1, 1, 10, 100, 500, 10000, 100000,100000000, 0.0001  },//HECTOGRAMO 
+                {0.022, 0.01, 0.1, 1 , 10, 50, 1000, 10000, 1000000000, 0.00001 },//DECAGRAMO 
+                {0.0022, 0.001, 0.01, 0.1, 1, 5, 100, 1000, 1000000, 0.000001 },//GRAMO 
+                {0.000441, 0.0002, 0.002, 0.02, 0.2, 1, 20, 200, 200000, 0.0000001 },//QUILATE 
+                {0.000022, 0.00001, 0.0001, 0.001, 0.001, 0.05, 1, 10, 10000, 0.00000001 },//CENTIGRAMO 
+                {0.000002, 0.000001, 0.00001, 0.0001, 0.001, 0.005, 0.1, 1, 1000, 0.000000001},//MILIGRAMO 
+                {0.0000000022, 0.000000001, 0.00000001, 0.0000001, 0.000001, 0.000005,0.0001, 0.001, 1, 0.000000000001 },//MICROGRAMO 
+                {2204.6226218, 1000, 10000, 100000, 1000000 , 5000000, 100000000, 1000000000, 1000000000000, 1 },//TONELADA
+            };
+            // nombre de las medidas de masa
+            string[] masas = { "Libra", "kilogramo", "Hectogramo", "Decagramo","Gramo", "Quilate", "Centigramo", "Miligramo", "Microgramo", "Tonelada"};
 
-        
+            Console.WriteLine("Convertidor de masa:");
+            Console.WriteLine("Seleccione la medida de origen (0-9):");
+            for (int i = 0; i < masas.Length; i++)
+            {
+                Console.WriteLine($"{i}. {masas[i]}");
+            }
+            int origen = int.Parse(Console.ReadLine());
+
+            Console.WriteLine("Seleccione la medida de destino (0-9):");
+            for (int i = 0; i < masas.Length; i++)
+            {
+                Console.WriteLine($"{i}.{masas[i]}");
+            }
+            int destino = int.Parse(Console.ReadLine());
+
+            Console.WriteLine("Ingrese el peso a convertir: ");
+            double peso = double.Parse(Console.ReadLine());
+
+            double resultado = peso * medidas[origen, destino];
+            Console.WriteLine($"El peso convertido es :{resultado} {masas[destino]}");
+
+            Console.ReadLine();
+        }
     }
 }
